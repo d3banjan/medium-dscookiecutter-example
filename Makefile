@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
-PROJECT_NAME = medium-dscookiecutter-example
+PROJECT_NAME = heating-algorithm
 PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
@@ -28,6 +28,10 @@ requirements: test_environment
 ## Make Dataset
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+
+## Make a test target to demo autodoc features
+demo:
+	echo "my target is fully functional. And a tiny bit awesome."
 
 ## Delete all compiled Python files
 clean:
