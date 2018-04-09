@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
-PROJECT_NAME = heating-algorithm
+PROJECT_NAME = medium-dscookiecutter-example
 PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
@@ -30,8 +30,9 @@ data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
 ## Make a test target to demo autodoc features
-demo:
+demo: requirements
 	echo "my target is fully functional. And a tiny bit awesome."
+	$(PYTHON_INTERPRETER) src/data/demo.py --opts ${DEMOOPTS}
 
 ## Delete all compiled Python files
 clean:
@@ -59,7 +60,7 @@ else
 endif
 
 ## Set up python interpreter environment
-create_environment:
+create_env:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
